@@ -1,18 +1,18 @@
 {{link-to "index" "index"}}
 <br><br>
 
-<button {{action "transitionTo" "foo.bar"}}>foo.bar (broken)</button>
-<br>
-<button {{action "transitionTo" "one.two"}}>one.two (works)</button>
-
-<br><br>
-
 {{#if false}}
   {{link-to "foo.bar (broken)" "foo.bar"}}
-  <br>
+{{else}}
+  <button {{action "transitionTo" "foo.bar"}}>foo.bar (broken)</button>
 {{/if}}
+<br>
 
 {{link-to "one.two (works)" "one.two"}}
 <br>
+
+{{link-to "no.auto-generated.index (works)" "no.auto-generated.index"}}
+<br>
+
 
 {{outlet}}
