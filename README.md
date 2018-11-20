@@ -1,58 +1,33 @@
 # mu-nested-routes
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+This repo demos a bug in the Module Unification resolver. It does not work for routes which are nested three levels deep.
 
-## Prerequisites
+This is the `router.js`:
 
-You will need the following things properly installed on your computer.
+```js
+Router.map(function() {
+  this.route('foo', function() {
+    this.route('bar', function() {
+      // You don't even need to register a third-level route. Just providing the
+      // callback triggers the error.
+      // this.route('qux');
+    });
+  });
+  this.route('one', function() {
+    this.route('two');
+  });
+});
+```
 
-* [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/)
-* [Yarn](https://yarnpkg.com/)
-* [Ember CLI](https://ember-cli.com/)
-* [Google Chrome](https://google.com/chrome/)
+### Instructions
 
-## Installation
+```
+git clone git@github.com:buschtoens/mu-nested-routes.git
+cd mu-nested-routes
+yarn
+ember s
+```
 
-* `git clone <repository-url>` this repository
-* `cd mu-nested-routes`
-* `yarn install`
+Open http://localhost:4200/
 
-## Running / Development
-
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-* Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
-
-### Code Generators
-
-Make use of the many generators for code, try `ember help generate` for more details
-
-### Running Tests
-
-* `ember test`
-* `ember test --server`
-
-### Linting
-
-* `yarn lint:hbs`
-* `yarn lint:js`
-* `yarn lint:js --fix`
-
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
-
-* [ember.js](https://emberjs.com/)
-* [ember-cli](https://ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+You don't need to pass the MU env flag, since `.ember-cli.js` already does that for you.
